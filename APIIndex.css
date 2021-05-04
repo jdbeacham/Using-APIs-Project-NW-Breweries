@@ -1,0 +1,179 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+    margin: 0;
+    background: url("apibckgrnd.jpg") no-repeat center center fixed;;
+    background-size: cover;
+}
+
+
+
+
+
+button, .submit {
+    background-color: white;
+    font-family: 'Fjalla One', sans-serif;
+    color: seagreen;
+    border: 2px solid black;
+    border-radius: 2px;
+    padding: 5px;
+}
+
+.submit a {
+    display: block;
+    text-decoration: none;
+    color: seagreen;
+}
+
+.submit:hover, button:hover {
+    background-color: gold;
+    transition: 1s;
+}
+
+
+
+#navWrapper {
+    display: inline-flex;
+    background-color: gold;
+    opacity: .9;
+    font-family: 'Fjalla One', sans-serif;
+    padding: 2px;
+    border-radius: 0 0 10px 0;
+    animation-name: zoomWrapper;
+    animation-duration: 3s;
+}
+
+.navButtons {
+    display: inline-block;
+    padding: 15px 9px;
+    text-decoration: none;
+    color: black;
+}
+
+.navButtons a {
+    text-decoration: none;
+    color: black;
+}
+
+.navButtons a:hover {
+    color: seagreen;
+    transition: 1s;
+}
+
+
+
+#icon {
+    width: 40px;
+    display: inline-block;
+    padding-left: 15px;
+    padding-top: 5px;
+    
+}
+
+#mainWrapper {
+width: 40%;
+background-color: seagreen;
+opacity: .9;
+color: white;
+letter-spacing: 1px;
+margin-top: 50px;
+margin-bottom: 10px;
+padding: 20px;
+border-radius: 10px;
+animation-name: zoomWrapper;
+animation-duration: 3s;
+}
+
+.titleWrapper {
+    font-family: 'Notable', sans-serif;
+    font-size: 1.5em;
+    padding: 5px;
+}
+
+.subTitle {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1em;
+    color: gold;
+}
+
+.subTitle a {
+    text-decoration: none;
+    color: black;
+}
+
+#myLocationWrapper {
+    padding: 10px;
+    padding-top: 20px;
+}
+
+#formWrapper {
+    padding: 10px;
+}
+
+#listWrapper {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    width: 40%;
+    font-family: 'Fjalla One', sans-serif;
+    animation-name: zoomWrapper;
+    animation-duration: 2s;
+}
+
+.listingWrapper {
+    padding: 10px;
+    text-align: left;
+}
+
+.inlineList {
+    display: inline-block;
+}
+
+#inlineListLink a:link, #inlineListLink a:active, #inlineListLink a:hover, #inlineListLink a:visited {
+color: seagreen;
+}
+
+#directionsListLink a:link, #directionsListLink a:active, #directionsListLink a:hover, #directionsListLink a:visited {
+    color: darkgray;
+    }
+
+.buttons {
+    display: inline-block;
+    margin: 5px;
+}
+
+.listButtons {
+    color: seagreen;
+    border: 2px solid seagreen;
+    border-radius: 2px;
+}
+
+
+
+@keyframes zoomWrapper {
+    0% {opacity: 0;
+    transform: scaleZ(0);}
+    40% {
+        opacity: 0;
+    }   
+    100% {opacity: .9;
+    transform: scaleZ(1);}
+}
+
+@keyframes back {
+    0% {opacity: 0;
+    transform: scaleY(0);}
+    100% {opacity: 1;
+    transform: scaleY(1);}
+}
+
+
+@media screen and (max-width: 600px) {
+    #mainWrapper, #listWrapper {
+        width: 70%;
+    }
+
+  
+}
