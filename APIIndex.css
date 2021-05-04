@@ -27,8 +27,6 @@ button, .submit {
     transition: 1s;
 }
 
-
-
 #navWrapper {
     display: inline-flex;
     background-color: gold;
@@ -56,8 +54,6 @@ button, .submit {
     color: seagreen;
     transition: 1s;
 }
-
-
 
 #icon {
     width: 40px;
@@ -146,8 +142,6 @@ color: seagreen;
     border-radius: 2px;
 }
 
-
-
 @keyframes zoomWrapper {
     0% {opacity: 0;
     transform: scaleZ(0);}
@@ -164,7 +158,6 @@ color: seagreen;
     100% {opacity: 1;
     transform: scaleY(1);}
 }
-
 
 @media screen and (max-width: 600px) {
     #mainWrapper, #listWrapper {
