@@ -1,17 +1,14 @@
 <?php
 session_start();
 ?>
-
 <meta charset="UTF-8">
 <?php
 
+/* Get latitude and longitude from Google */
 
 if (isset($location) || $myLocation == "yes") {
-    
     $nwcArray=$_SESSION['nwcArray'];
-   
 if (isset($location)) {
-
 $locURL = "https://maps.googleapis.com/maps/api/geocode/json?address=,$regexlocation,&key=AIzaSyAQS-8sYRq5oEtfnYpOnKo49zW-dzVP7pI";
 $channel = curl_init();
 curl_setopt($channel, CURLOPT_RETURNTRANSFER, true);
@@ -20,10 +17,8 @@ $result = curl_exec($channel);
 $googleData = json_decode($result, true);
 curl_close($channel);
 
-
 $lat = ($googleData["results"][0]["geometry"]["location"]["lat"]);
 $lng = ($googleData["results"][0]["geometry"]["location"]["lng"]);
-
 }
 
 if ($myLocation == "yes") {
@@ -31,8 +26,7 @@ if ($myLocation == "yes") {
     $lng = $_GET["longitude"];
     }
 
-
-/* Filtering for breweries within 10 miles of locaction factoring for the curve of the earth */
+/* Filtering for breweries within 10 miles of location factoring for the curve of the earth */
 
 $R = 3950;
 $r = 10;
@@ -41,7 +35,6 @@ $maxLat = $lat + rad2deg($r/$R);
 $minLat = $lat - rad2deg($r/$R);
 $maxLng = $lng + rad2deg(asin($r/$R) / cos(deg2rad($lat)));
 $minLng = $lng - rad2deg(asin($r/$R) / cos(deg2rad($lat)));
-
 
 $listArray = array();
 for ($i = 0; $i < count($nwcArray); $i++) {
@@ -61,7 +54,6 @@ $a = sin($distanceLat/2) * sin($distanceLat/2) + cos(deg2rad($lat)) * cos(deg2ra
 $c = 2 * asin(sqrt($a));
 $d = $R * $c;
 $listArray[$i]["haverdistance"] = $d;
-
 }
 
 /* Sort breweries by distance */
@@ -74,8 +66,6 @@ function sort_array($a,$b) {
     else return 1;
 }
 usort($listArray, "sort_array");
-
-
 array_splice($listArray,21);
 
 /* Get google distance for display */
@@ -107,5 +97,4 @@ function sort_array_again($a,$b) {
     return -1;
     else return 1;
 }
-
 ?>
