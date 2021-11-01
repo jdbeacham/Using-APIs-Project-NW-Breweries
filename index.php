@@ -13,8 +13,6 @@ session_start();
     </head>
 <body>
 
-
-
 <?php
 
 if (isset($_POST["location"])) {
@@ -23,21 +21,21 @@ $location = $_POST["location"];
 if (isset($_GET["myLocation"])) {
 $myLocation = $_GET["myLocation"];
 }
+	
 $regexlocation = preg_replace("/\s/","+",$location);
 $regexlocation = htmlspecialchars($regexlocation);
 
 if (isset($_POST["countList"])) {
 $listCountNew = $_POST["countList"];
 }
-
 if (isset($_GET['state'])){
     $state = $_GET["state"];
     }
 
 $brewery_list = array();
 
-
-/* Grab info from Open Brewery DB if intial index load */
+/* Grab info from Open Brewery DB and send to php session if intial load of index pages */
+	
 if (!isset($listCountNew) && !isset($location) && !isset ($myLocation) && !isset($state)) {
 $nwcArray = array();
 $washArray = array();
@@ -54,7 +52,7 @@ $result = curl_exec($ch);
 $unfilteredNWCArray = json_decode($result, true);
 curl_close($ch);
 
-/* Push data to state arrays */
+/* Push data to state arrays and save to php session */
 
 for ($j = 0; $j < count($unfilteredNWCArray); $j++) {
     if ($unfilteredNWCArray[$j]["state"] == $searchArray[$i]) {
@@ -70,6 +68,9 @@ for ($j = 0; $j < count($unfilteredNWCArray); $j++) {
         }
     }
 }
+	
+/* Send all info to php session */
+	
 $_SESSION['nwcArray'] = $nwcArray;
 $_SESSION['washArray'] = $washArray;
 $_SESSION['oreArray'] = $oreArray;
@@ -77,14 +78,16 @@ $_SESSION['idahoArray'] = $idahoArray;
 }
 }
 
-
+/* Get all info from php session */
+	
 if (isset($state)) {
 $nwcArray = $_SESSION['nwcArray'];
 $washArray = $_SESSION['washArray'];
 $oreArray = $_SESSION['oreArray'];
 $idahoArray = $_SESSION['idahoArray'];
 }
-
+	
+/* If state has been selected, grab random breweries from state */
 
 if ($state == "Washington") {
     $randomStateKey = array_rand($washArray,5);
@@ -107,10 +110,6 @@ if ($state == "Idaho") {
         array_push($stateArray,$idahoArray[$randomStateKey[$i]]);
     }
 }
-
-/* Pushing state and northwest arrays to session */
-
-
 
 require_once "code.php";
 
@@ -306,23 +305,16 @@ else {
     }, 3000);
 }
 
-
 function getLocation(){
-
-    navigator.geolocation.getCurrentPosition(showPosition);
+	navigator.geolocation.getCurrentPosition(showPosition);
 function showPosition(position) {
     let latitude=position.coords.latitude;
     let longitude=position.coords.longitude;
     window.location.replace("https://jb-codes.com/api/?myLocation=yes&latitude=" + latitude + "&longitude=" + longitude);
 }
 }
-
-    
-
 </script>
 
-
-
-    </body>
+</body>
 </html>
 
